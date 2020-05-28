@@ -25,7 +25,7 @@ def upload_file():
 
         # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
         # print(df["Serial_year"])
-        print(data.columns)
+        # print(data.columns)
         return jsonify({"result":whole_file})
     return render_template("index.html")
 
