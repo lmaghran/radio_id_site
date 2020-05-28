@@ -1,24 +1,18 @@
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 import flask_excel as excel
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key= "ABC"
 
 
-@app.route("/upload", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         return jsonify({"result": request.get_array(field_name='file')})
-    return '''
-    <!doctype html>
-    <title>Upload an excel file</title>
-    <h1>Excel file upload (csv, tsv, csvz, tsvz only)</h1>
-    <form action="" method=post enctype=multipart/form-data><p>
-    <input type=file name=file><input type=submit value=Upload>
-    </form>
-    '''
+    return render_template("index.html")
 
 
 @app.route("/download", methods=['GET'])
