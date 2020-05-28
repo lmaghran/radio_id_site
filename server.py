@@ -11,7 +11,11 @@ app.secret_key= "ABC"
 @app.route("/", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        return jsonify({"result": request.get_array(field_name='file')})
+        whole_file= request.get_array(field_name='file')
+        df = pd.DataFrame(whole_file[1:], columns=whole_file[0])
+        df["Second_letter"]= df['Radio Serial Number'].astype(str).str[1]
+        print(df["Second_letter"])
+        return jsonify({"result":whole_file})
     return render_template("index.html")
 
 
