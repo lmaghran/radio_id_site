@@ -21,7 +21,7 @@ def upload_file():
         df = pd.DataFrame(whole_file[1:], columns=whole_file[0])
         df["Second_letter"]= df['Radio Serial Number'].astype(str).str[1]
         data = pd.read_csv("year_from_site.txt", sep=" ", header=[0])
-        data.rename(columns={'Second':'Junk', 'is': 'Junk'}, inplace=True)
+        data.rename(columns={'Second':'Junk', 'is': 'Junk', 'the':'Junk'}, inplace=True)
 
         # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
         # print(df["Serial_year"])
