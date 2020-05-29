@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 import flask_excel as excel
 import pandas as pd
+from server_functions import read_year_data, format_file
 
 app = Flask(__name__)
 app.secret_key= "ABC"
@@ -18,15 +19,8 @@ app.secret_key= "ABC"
 def upload_file():
     if request.method == 'POST':
         whole_file= request.get_array(field_name='file')
-        df = pd.DataFrame(whole_file[1:], columns=whole_file[0])
-        df["Second_Letter"]= df['Radio Serial Number'].astype(str).str[4]
-        data = pd.read_csv("year_from_site.txt", sep=" ", header=[0])
-        data.rename(columns={'Second':'Junk', 
-                            'Letter':'Second_Letter',
-                            'is':'Earliest possible year', 
-                            'the':'Junk', 
-                            'year:':'Latest possible year'}, 
-                    inplace=True)
+        df= format_file()
+        data=read_year_data()
         merged_df= pd.merge(df, data,
                             left_on= 'Second_Letter',
                             right_on= 'Second_Letter',
