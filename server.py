@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 import flask_excel as excel
 import pandas as pd
+import openpyxl as openpyxl
+from jinja2 import StrictUndefined
 from server_functions import read_year_data, read_month_data, format_file, merged_df
 
 app = Flask(__name__)
@@ -23,11 +25,8 @@ def upload_file():
         year_data=read_year_data()
         month_data=read_month_data()
         merged_frame= merged_df(df, year_data, month_data)
-
-        # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
-        # print(df["Serial_year"])
-        print(merged_frame)
-        return jsonify({"result":whole_file})
+        merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
+        return render_template("index.html", merged_frame=merged_frame)
     return render_template("index.html")
 
 

@@ -28,8 +28,8 @@ def read_month_data():
                 inplace=True)
     col_lst= ['Third Letter', 'Month_part', 'Month']
     data=data[col_lst]
-    data['Month_part'].replace('First', 1, inplace=True)
-    data['Month_part'].replace('Last', 15, inplace=True)
+    data['Month_part'].replace('First', '1', inplace=True)
+    data['Month_part'].replace('Last', '15', inplace=True)
     return data
 
 def merged_df(df, data, month_data):
@@ -41,4 +41,5 @@ def merged_df(df, data, month_data):
         left_on= 'Third_Letter',
         right_on= 'Third Letter',
         how='left')
+     merged_df['Manufacture_date']= merged_df['Month']+" "+merged_df['Month_part']+", "+merged_df['Latest possible year'].astype(str)
      return merged_df
