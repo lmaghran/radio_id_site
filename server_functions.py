@@ -28,11 +28,17 @@ def read_month_data():
                 inplace=True)
     col_lst= ['Third Letter', 'Month_part', 'Month']
     data=data[col_lst]
+    data['Month_part'].replace('First', 1, inplace=True)
+    data['Month_part'].replace('Last', 15, inplace=True)
     return data
 
-def merged_df(df, data):
-     merged_df= pd.merge(df, data,
+def merged_df(df, data, month_data):
+     merged= pd.merge(df, data,
         left_on= 'Second_Letter',
         right_on= 'Second_Letter',
+        how='left')
+     merged_df= pd.merge(merged, month_data,
+        left_on= 'Third_Letter',
+        right_on= 'Third Letter',
         how='left')
      return merged_df

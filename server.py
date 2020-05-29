@@ -22,11 +22,11 @@ def upload_file():
         df= format_file()
         year_data=read_year_data()
         month_data=read_month_data()
-        merged_frame_year= merged_df(df, year_data)
+        merged_frame= merged_df(df, year_data, month_data)
 
         # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
         # print(df["Serial_year"])
-        print(month_data)
+        print(merged_frame)
         return jsonify({"result":whole_file})
     return render_template("index.html")
 
