@@ -19,9 +19,19 @@ def upload_file():
     if request.method == 'POST':
         whole_file= request.get_array(field_name='file')
         df = pd.DataFrame(whole_file[1:], columns=whole_file[0])
-        df["Second_letter"]= df['Radio Serial Number'].astype(str).str[1]
+        df["Second_Letter"]= df['Radio Serial Number'].astype(str).str[4]
         data = pd.read_csv("year_from_site.txt", sep=" ", header=[0])
-        data.rename(columns={'Second':'Junk', 'is': 'Junk', 'the':'Junk'}, inplace=True)
+        data.rename(columns={'Second':'Junk', 
+                            'Letter':'Second_Letter',
+                            'is':'Earliest possible year', 
+                            'the':'Junk', 
+                            'year:':'Latest possible year'}, 
+                    inplace=True)
+        merged_df= pd.merge(df, data,
+                            left_on= 'Second_Letter',
+                            right_on= 'Second_Letter',
+                            how='left')
+        print(merged_df)
 
         # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
         # print(df["Serial_year"])
@@ -53,10 +63,3 @@ if __name__ == "__main__":
     excel.init_excel(app)
     DebugToolbarExtension(app)
     app.run(host="0.0.0.0")
-
-    # if __name__ == "__main__": 
-
-    # # app.debug = True #pragma: no cover
-    # # connect_to_db(app) #pragma: no cover
-    # # DebugToolbarExtension(app) #pragma: no cover
-    # # app.run(host="0.0.0.0")
