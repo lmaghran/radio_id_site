@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 import flask_excel as excel
 import pandas as pd
-from server_functions import read_year_data, format_file
+from server_functions import read_year_data, read_month_data, format_file, merged_df
 
 app = Flask(__name__)
 app.secret_key= "ABC"
@@ -20,16 +20,13 @@ def upload_file():
     if request.method == 'POST':
         whole_file= request.get_array(field_name='file')
         df= format_file()
-        data=read_year_data()
-        merged_df= pd.merge(df, data,
-                            left_on= 'Second_Letter',
-                            right_on= 'Second_Letter',
-                            how='left')
-        print(merged_df)
+        year_data=read_year_data()
+        month_data=read_month_data()
+        merged_frame_year= merged_df(df, year_data)
 
         # df["Serial_year"]= year_data[df["Second_letter"].astype(str)]
         # print(df["Serial_year"])
-        # print(data.columns)
+        print(month_data)
         return jsonify({"result":whole_file})
     return render_template("index.html")
 

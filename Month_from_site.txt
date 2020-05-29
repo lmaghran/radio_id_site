@@ -1,25 +1,25 @@
-Third_letter Month
-A First half of January 
-B Last half of January 
-C First half of February 
-D Last half of February 
-E First half of March 
-F Last half of March 
-G First half of April 
-H Last half of April 
-J First half of May 
-K Last half of May 
-L First half of June 
-M Last half of June 
-N First half of July 
-P Last half of July 
-Q First half of August 
-R Last half of August 
-S First half of September 
-T Last half of September 
-U First half of October 
-V Last half of October 
-W First half of November 
-X Last half of November 
-Y First half of December 
-Z Last half of December 
+> The third letter identifies the portion of the month in which the unit was made:
+> A First half of January 
+> B Last half of January 
+> C First half of February 
+> D Last half of February 
+> E First half of March 
+> F Last half of March 
+> G First half of April 
+> H Last half of April 
+> J First half of May 
+> K Last half of May 
+> L First half of June 
+> M Last half of June 
+> N First half of July 
+> P Last half of July 
+> Q First half of August 
+> R Last half of August 
+> S First half of September 
+> T Last half of September 
+> U First half of October 
+> V Last half of October 
+> W First half of November 
+> X Last half of November 
+> Y First half of December 
+> Z Last half of December 
