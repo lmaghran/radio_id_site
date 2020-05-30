@@ -10,13 +10,6 @@ from server_functions import read_year_data, read_month_data, format_file, merge
 app = Flask(__name__)
 app.secret_key= "ABC"
 
-
-# data.columns = ["a", "line_letter", "first_year", "etc.", "later_year", "d"]
-# data.drop("a", axis=1)
-# data.drop("etc.", axis=1)
-# data.drop("d", axis=1)
-# data.drop(data.index[0])
-
 @app.route("/", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -25,6 +18,9 @@ def upload_file():
         year_data=read_year_data()
         month_data=read_month_data()
         merged_frame= merged_df(df, year_data, month_data)
+        # merged_frame['Year']= pd.to_datetime(merged_frame['Year'], format='%Y')
+        # merged_frame['Month']= pd.to_datetime(merged_frame['Month'], format='%B')
+        # merged_frame['Latest possible year']= pd.to_datetime(merged_frame['Latest possible year'], format='%Y')
         merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
         return render_template("index.html", merged_frame=merged_frame)
     return render_template("index.html")
