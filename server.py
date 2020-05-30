@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 from flask_debugtoolbar import DebugToolbarExtension
 import flask_excel as excel
 import pandas as pd
@@ -22,25 +22,32 @@ def upload_file():
         # merged_frame['Month']= pd.to_datetime(merged_frame['Month'], format='%B')
         # merged_frame['Latest possible year']= pd.to_datetime(merged_frame['Latest possible year'], format='%Y')
         merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
-        return render_template("index.html", merged_frame=merged_frame)
+        return send_file('output.xlsx', attachment_filename='output.xlsx')
+        # return render_template("index.html", merged_frame=merged_frame)
     return render_template("index.html")
 
+@app.route('/return-files/')
+def return_files_tut():
+    try:
+        return send_file('output.xlsx', attachment_filename='output.xlsx')
+    except Exception as e:
+        return str(e)
 
-@app.route("/download", methods=['GET'])
-def download_file():
-    return excel.make_response_from_array([[1, 2], [3, 4]], "csv")
+# @app.route("/download", methods=['GET'])
+# def download_file():
+#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv")
 
 
-@app.route("/export", methods=['GET'])
-def export_records():
-    return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
-                                          file_name="export_data")
+# @app.route("/export", methods=['GET'])
+# def export_records():
+#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
+#                                           file_name="export_data")
 
 
-@app.route("/download_file_named_in_unicode", methods=['GET'])
-def download_file_named_in_unicode():
-    return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
-                                          file_name=u"中文文件名")
+# @app.route("/download_file_named_in_unicode", methods=['GET'])
+# def download_file_named_in_unicode():
+#     return excel.make_response_from_array([[1, 2], [3, 4]], "csv",
+#                                           file_name=u"中文文件名")
 
 
 # insert database related code here
