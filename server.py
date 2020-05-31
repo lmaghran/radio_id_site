@@ -5,6 +5,7 @@ import flask_excel as excel
 import pandas as pd
 import openpyxl as openpyxl
 from jinja2 import StrictUndefined
+import os
 from server_functions import read_year_data, read_month_data, format_file, merged_df
 
 app = Flask(__name__)
@@ -18,9 +19,11 @@ def upload_file():
         year_data=read_year_data()
         month_data=read_month_data()
         merged_frame= merged_df(df, year_data, month_data)
+        # os.remove("output.xlsx")
         # merged_frame['Year']= pd.to_datetime(merged_frame['Year'], format='%Y')
         # merged_frame['Month']= pd.to_datetime(merged_frame['Month'], format='%B')
         # merged_frame['Latest possible year']= pd.to_datetime(merged_frame['Latest possible year'], format='%Y')
+        
         try:
             merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
             return send_file('output.xlsx', attachment_filename='output.xlsx')
