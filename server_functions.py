@@ -16,7 +16,7 @@ def read_year_data():
     data.rename(columns=col_dict, inplace=True)
     col_lst= ['Second_Letter', 'Year']
     data=data[col_lst]
-    data['Year']= pd.to_datetime(data['Year'], format='%Y')
+    # data['Year']= pd.to_datetime(data['Year'], format='%Y')
     return data
 
 def read_month_data():
@@ -30,8 +30,9 @@ def read_month_data():
     data=data[col_lst]
     data['Month_part'].replace('First', '01', inplace=True)
     data['Month_part'].replace('Last', '15', inplace=True)
-    data['Month']= pd.to_datetime(data['Month'], format='%B')
-    data['Day']= pd.to_datetime(data['Month_part'], format='%d')
+    data['Day']= data['Month_part']
+    # data['Month']= pd.to_datetime(data['Month'], format='%B')
+    # data['Day']= pd.to_datetime(data['Month_part'], format='%d')
     return data
 
 def merged_df(df, data, month_data):
@@ -46,5 +47,5 @@ def merged_df(df, data, month_data):
      # merged_df['Year']= pd.to_datetime(merged_df['Year'], format='%Y')
      # merged_df['Combined']= merged_df.apply(lambda row : pd.datetime.combine(merged_df['Year'], merged_df['Month'], errors='coerce'), 1)
      # print(merged_df['Year'])
-     # merged_df['Manufacture_date']= merged_df['Month']+" "+merged_df['Month_part']+", "+merged_df['Latest possible year'].astype(str)
+     merged_df['Manufacture_date']= merged_df['Month']+" "+merged_df['Month_part']+", "+merged_df['Year'].astype(str)
      return merged_df

@@ -21,9 +21,12 @@ def upload_file():
         # merged_frame['Year']= pd.to_datetime(merged_frame['Year'], format='%Y')
         # merged_frame['Month']= pd.to_datetime(merged_frame['Month'], format='%B')
         # merged_frame['Latest possible year']= pd.to_datetime(merged_frame['Latest possible year'], format='%Y')
-        merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
-        return send_file('output.xlsx', attachment_filename='output.xlsx')
-        # return render_template("index.html", merged_frame=merged_frame)
+        try:
+            merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
+            return send_file('output.xlsx', attachment_filename='output.xlsx')
+        except Exception as e:
+            return str(e)
+
     return render_template("index.html")
 
 @app.route('/return-files/')
