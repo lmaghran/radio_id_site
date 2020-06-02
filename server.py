@@ -23,8 +23,12 @@ def upload_file():
         merged_frame= drop_cols(merged_frame)
         
         try:
+            open('output.xlsx', 'w')
             merged_frame=merged_frame.to_excel("output.xlsx", sheet_name='Sheet_name_1')
-            return send_file('output.xlsx', attachment_filename='output.xlsx')
+            send_file('output.xlsx', attachment_filename='output.xlsx')
+            import os
+            os.remove('output.xlsx')
+            return render_template("index.html")
         except Exception as e:
             return str(e)
 

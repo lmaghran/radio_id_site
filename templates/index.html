@@ -8,21 +8,28 @@
     <title>Moto Radio Tools</title>
 </head>
 <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Motorola Radio Toolkit</h1>
+    <div id="page-container">
+    <div id="content-wrap">
+        <div class="jumbotron">
+            <h1 class="display-4">Motorola Radio Toolkit</h1>
             <p class="lead"> A simple tool to convert Motorola radio serial numbers to manufacture date.  Directly upload Motorola P25 core CSV files and the system will output your CSV with a manufacture date column.</p>
             <hr class="my-4">
             <h2 class="display-7">File upload (csv only)</h2>
                 <p class="lead"> Before uploading a file, ensure that your data is in CSV format and that your serial number column is labeled 'Radio Serial Number' (without quotation marks). </p>
-                <form action="" method=post enctype=multipart/form-data ><p>
+                <form action="" method=post enctype=multipart/form-data >
                     <input type=file name=file value="Upload a File">
             <h2 class="display-7">File Conversion and Download</h2>
                 <p class="lead"> Click here after uploading to add manufacture date to your data. </p>
                     <input type=submit value="Convert and Download">
                 </form>
-<!--                 <a class="btn btn-primary btn-lg" href="#" role="button">Upload File</a>
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                     -->
+        </div>
     </div>
+        <footer id="footer">
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="https://github.com/lmaghran"> Lauren Maghran</a>
+            </div>
+        </footer>
+    </div>
+</div>        
 </body>
 </html>
