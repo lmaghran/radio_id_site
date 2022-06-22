@@ -8,7 +8,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 lml==0.0.9
 MarkupSafe==1.1.1
-numpy==1.18.4
+numpy==1.22.0
 pandas==1.0.3
 pkg-resources==0.0.0
 pyexcel==0.6.1
